@@ -8,12 +8,11 @@ let passingIds = [];
 const amounts = {red: 12, green: 13, blue: 14}
 
 try {
-    data = fs.readFileSync('../input.txt', 'utf8');
+    data = fs.readFileSync('../input.txt', 'utf8').split('\n');
 } catch (err) {
     console.error(err);
 }
 
-data = data.split('\n');
 
 function splitString(inputString) {
     // remove header
@@ -23,12 +22,11 @@ function splitString(inputString) {
     // commas and spaces
     const commaSeparated = semicolonSeparated.map(element => element.split(/,\s*/));
     // split by spaces
-    let spaceSeparated = commaSeparated.map(element => element.map(element => element.split(" ")));
-    return spaceSeparated;
+    return commaSeparated.map(element => element.map(element => element.split(" ")));
 }
 
 
-const parseColorData = (lineArray, id) => {
+const parseColorData = (lineArray) => {
     let sums = {red: 0, green: 0, blue: 0};
 
     for (let i = 0; i < lineArray.length; i++) {
@@ -60,7 +58,7 @@ data.forEach((line, index) => {
     let id = index + 1;
     data[index] = splitString(line);
     // if(index===0)console.log(data[index]);
-    if (parseColorData(data[index], id)) passingIds.push(id);
+    if (parseColorData(data[index])) passingIds.push(id);
 });
 
 console.log("passing:", passingIds)
