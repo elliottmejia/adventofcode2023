@@ -57,7 +57,6 @@ const parseColorData = (lineArray) => {
 }
 
 data.forEach((line, index) => {
-    let id = index + 1;
     data[index] = splitString(line);
     // if(index===0)console.log(data[index]);
     output += parseColorData(data[index])
